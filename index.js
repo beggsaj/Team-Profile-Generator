@@ -34,6 +34,62 @@ const questions = [{
     }
 ];
 
+const internQuestions = [{
+    type: 'input',
+    name: 'name',
+    message: 'Enter your name:',
+},
+{
+    type: 'input',
+    name: 'github',
+    message: 'Enter your employee ID:',
+},
+{
+    type: 'input',
+    name: 'email',
+    message: 'Enter your email address:',
+},
+{
+    type: 'input',
+    name: 'description',
+    message: 'Enter your office number:',
+},
+{
+    type: 'checkbox',
+    name: 'job',
+    message: 'Select new team member:',
+    choices: ['Engineer','Intern','Finish Building Team']
+}
+];
+
+const engineerQuestions = [{
+    type: 'input',
+    name: 'name',
+    message: 'Enter your name:',
+},
+{
+    type: 'input',
+    name: 'github',
+    message: 'Enter your employee ID:',
+},
+{
+    type: 'input',
+    name: 'email',
+    message: 'Enter your email address:',
+},
+{
+    type: 'input',
+    name: 'description',
+    message: 'Enter your office number:',
+},
+{
+    type: 'checkbox',
+    name: 'job',
+    message: 'Select new team member:',
+    choices: ['Engineer','Intern','Finish Building Team']
+}
+];
+
 // function to write HTML file
 function writeToFile(fileName, data) {
     fs.writeFile(fileName, data, (err) => {
@@ -41,6 +97,14 @@ function writeToFile(fileName, data) {
             throw err;
         console.log('saved')
     })
+}
+
+function generateHTML(data) {
+    return `
+# ${data.name}
+* Github: https://github.com/${data.github}
+* Email: ${data.email}
+    `
 }
 
 // TODO: Create a function to initialize app

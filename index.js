@@ -1,9 +1,9 @@
 //packages needed for this application
 const fs = require('fs');
 const inquirer = require('inquirer')
-const manager = require('./lib/manager')
-const intern = require('./lib/intern')
-const engineer = require('./lib/engineer')
+const Manager = require('./lib/Manager')
+const Intern = require('./lib/Intern')
+const Engineer = require('./lib/Engineer')
 
 //array of questions for user input
 const questions = [{

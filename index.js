@@ -27,11 +27,6 @@ const questions = [{
         message: 'Enter your office number:',
     },
     {
-        type: 'input',
-        name: 'location',
-        message: 'Enter your office location:',
-    },
-    {
         type: 'confirm',
         name: 'addteam',
         message: 'Do you need to add any additional team members',
@@ -91,7 +86,14 @@ const questions = [{
         message: 'Enter Intern School',
         when: (answers) => answers.employeetype === 'Intern'
     },
+    {
+        type: 'confirm',
+        name: 'addteamagain',
+        message: 'Do you need to add any additional team members',
+    },
+    
 ];
+
 
 function jobTitle(add) {
     return function (answers) {
@@ -110,9 +112,7 @@ function writeToFile(fileName, data) {
 
 function generateHTML(data) {
     return `
-# ${data.name}
-* Github: https://github.com/${data.github}
-* Email: ${data.email}
+
     `
 }
 

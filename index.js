@@ -104,36 +104,20 @@ function employeeQuestions(){
         }
     ]).then(answers => {
         if (answers.employeeType === 'Intern'){
-            console.log('intern')
+            const intern = new Intern(answers.internname, answers.internid, answers.internemail, answers.internschool)
+            completeTeam.push(intern)
         } else if (answers.employeeType === 'Engineer') {
-            console.log('engineer')
+            const engineer = new Engineer (answers.engineername, answers.engineerid, answers.engineeremail, answers.engineergithub)
+            completeTeam.push(engineer)
         } if (answers.addteamagain === true){
             employeeQuestions()
         } else {
-            console.log('tbd')
+
+            fs.writeFile('./index.html')
+            
+            console.log('please view index.html for the completed team')
         }
     })
-}
-
-
-// function to write HTML file
-const writeFile = data => {
-    fs.writeFile('./index.html', data, err => {
-        if (err) {
-            console.log(err)
-            return
-        } else {
-            console.log('success!')
-        }
-    })
-}
-
-
-
-function generateHTML(data) {
-    return `
-
-    `
 }
 
 

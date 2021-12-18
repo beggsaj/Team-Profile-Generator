@@ -6,7 +6,7 @@ const Manager = require('./lib/Manager')
 const Intern = require('./lib/Intern')
 const Engineer = require('./lib/Engineer')
 
-const completeTeam = []
+var completeTeam = []
 let manager;
 
 //array of questions for user input
@@ -44,7 +44,7 @@ function employeeQuestions(){
     inquirer.prompt([
         {
             type: 'list',
-            name: 'employeetype',
+            name: 'employeeType',
             message: 'Select new team member :',
             choices: ['Engineer', 'Intern', 'Finish Building Team'],
         },
@@ -52,49 +52,49 @@ function employeeQuestions(){
             type: 'input',
             name: 'engineerName',
             message: 'Enter Engineer Name',
-            when: (answers) => answers.employeetype === 'Engineer'
+            when: (answers) => answers.employeeType === 'Engineer'
         },
         {
             type: 'input',
             name: 'engineerID',
             message: 'Enter Engineer ID',
-            when: (answers) => answers.employeetype === 'Engineer'
+            when: (answers) => answers.employeeType === 'Engineer'
         },
         {
             type: 'input',
             name: 'engineerEmail',
             message: 'Enter Engineer Email',
-            when: (answers) => answers.employeetype === 'Engineer'
+            when: (answers) => answers.employeeType === 'Engineer'
         },
         {
             type: 'input',
             name: 'engineerGithub',
             message: 'Enter Engineer Github',
-            when: (answers) => answers.employeetype === 'Engineer'
+            when: (answers) => answers.employeeType === 'Engineer'
         },
         {
             type: 'input',
             name: 'internname',
             message: 'Enter Intern Name',
-            when: (answers) => answers.employeetype === 'Intern'
+            when: (answers) => answers.employeeType === 'Intern'
         },
         {
             type: 'input',
             name: 'internid',
             message: 'Enter Intern id',
-            when: (answers) => answers.employeetype === 'Intern'
+            when: (answers) => answers.employeeType === 'Intern'
         },
         {
             type: 'input',
             name: 'internemail',
             message: 'Enter Intern Email',
-            when: (answers) => answers.employeetype === 'Intern'
+            when: (answers) => answers.employeeType === 'Intern'
         },
         {
             type: 'input',
             name: 'internschool',
             message: 'Enter Intern School',
-            when: (answers) => answers.employeetype === 'Intern'
+            when: (answers) => answers.employeeType === 'Intern'
         },
         {
             type: 'confirm',
@@ -102,6 +102,7 @@ function employeeQuestions(){
             message: 'Do you need to add any additional team members',
         }
     ]).then(answers => {
+        console.log(answers.employeeType)
         if (answers.employeeType === 'Intern'){
             completeTeam.push(new Intern(answers.internname, answers.internid, answers.internemail, answers.internschool))
         } else if (answers.employeeType === 'Engineer') {
@@ -119,6 +120,7 @@ function employeeQuestions(){
 
 
             var cards = managerCard
+            console.log(completeTeam.length)
             for (var i = 0; i < completeTeam.length; i++) {
                 var employee = completeTeam[i];
                 cards += additionalEmployees(employee)

@@ -8,7 +8,6 @@ const Engineer = require('./lib/Engineer')
 
 const completeTeam = []
 let manager;
-let teamTitle
 
 //array of questions for user input
 
@@ -51,25 +50,25 @@ function employeeQuestions(){
         },
         {
             type: 'input',
-            name: 'engineername',
+            name: 'engineerName',
             message: 'Enter Engineer Name',
             when: (answers) => answers.employeetype === 'Engineer'
         },
         {
             type: 'input',
-            name: 'engineerid',
+            name: 'engineerID',
             message: 'Enter Engineer ID',
             when: (answers) => answers.employeetype === 'Engineer'
         },
         {
             type: 'input',
-            name: 'engineeremail',
+            name: 'engineerEmail',
             message: 'Enter Engineer Email',
             when: (answers) => answers.employeetype === 'Engineer'
         },
         {
             type: 'input',
-            name: 'engineergithub',
+            name: 'engineerGithub',
             message: 'Enter Engineer Github',
             when: (answers) => answers.employeetype === 'Engineer'
         },
@@ -104,11 +103,9 @@ function employeeQuestions(){
         }
     ]).then(answers => {
         if (answers.employeeType === 'Intern'){
-            const intern = new Intern(answers.internname, answers.internid, answers.internemail, answers.internschool)
-            completeTeam.push(intern)
+            completeTeam.push(new Intern(answers.internname, answers.internid, answers.internemail, answers.internschool))
         } else if (answers.employeeType === 'Engineer') {
-            const engineer = new Engineer (answers.engineername, answers.engineerid, answers.engineeremail, answers.engineergithub)
-            completeTeam.push(engineer)
+            completeTeam.push(new Engineer (answers.engineerName, answers.engineerID, answers.engineerEmail, answers.engineerGithub))
         } if (answers.addteamagain === true){
             employeeQuestions()
         } else {
@@ -120,10 +117,15 @@ function employeeQuestions(){
             managerCard = managerCard.replace('{{email}}', manager.getEmail())
             managerCard = managerCard.replace('{{description}}', manager.getOfficeNumber())
 
-            console.log(managerCard)
 
             var cards = managerCard
+            for (var i = 0; i < completeTeam.length; i++) {
+                var employee = completeTeam[i];
+                cards += additionalEmployees(employee)
+            }
 
+            console.log(completeTeam)
+            
             home = home.replace('{{cards}}', cards)
 
             fs.writeFileSync('./index.html', home)
@@ -133,6 +135,24 @@ function employeeQuestions(){
     })
 }
 
+function additionalEmployees (employee) {
+    if (employee.getRole() === 'Intern') {
+        var internCard =fs.readFileSync('./templates/Intern.html', 'utf8')
+        internCard = internCard.replace('{{name}}', employee.getName());
+        internCard = internCard.replace('{{ID}}', employee.getID())
+        internCard = internCard.replace('{{email}}', employee.getEmail())
+        internCard = internCard.replace('{{description}}', employee.getSchool())
+        return internCard
+    }  
+    else if (employee.getRole() === 'Engineer') {
+        var engineerCard =fs.readFileSync('./templates/Engineer.html', 'utf8')
+        engineerCard = engineerCard.replace('{{name}}', employee.getName());
+        engineerCard = engineerCard.replace('{{ID}}', employee.getID())
+        engineerCard = engineerCard.replace('{{email}}', employee.getEmail())
+        engineerCard = engineerCard.replace('{{description}}', employee.getGithub())
+        return engineerCard
+    }      
+}
 
 // Function call to initialize app
 managerQuestions()

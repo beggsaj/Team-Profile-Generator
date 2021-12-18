@@ -34,21 +34,19 @@ function managerQuestions(){
             name: 'description',
             message: 'Enter your office number:',
         }        
-    ])
+    ]).then(managerResponses => {
+        manager = new Manager(managerResponses.name,managerResponses.github,managerResponses.email,managerResponses.description)
+        console.log('manager info complete, please input the following information for the rest of the team')
+        employeeQuestions()
+    })
 }
 
 function employeeQuestions(){
     inquirer.prompt([
         {
-            type: 'confirm',
-            name: 'addteam',
-            message: 'Do you need to add any additional team members',
-        },
-        {
             type: 'list',
             name: 'employeetype',
             message: 'Select new team member :',
-            when: jobTitle('addteam'),
             choices: ['Engineer', 'Intern', 'Finish Building Team'],
         },
         {
@@ -104,14 +102,19 @@ function employeeQuestions(){
             name: 'addteamagain',
             message: 'Do you need to add any additional team members',
         }
-    ])
+    ]).then(answers => {
+        if (answers.employeeType === 'Intern'){
+            console.log('intern')
+        } else if (answers.employeeType === 'Engineer') {
+            console.log('engineer')
+        } if (answers.addteamagain === true){
+            employeeQuestions()
+        } else {
+            console.log('tbd')
+        }
+    })
 }
 
-function jobTitle(add) {
-    return function (answers) {
-        return answers[add];
-    };
-}
 
 // function to write HTML file
 const writeFile = data => {
@@ -125,7 +128,6 @@ const writeFile = data => {
     })
 }
 
-questions()
 
 
 function generateHTML(data) {
@@ -134,14 +136,6 @@ function generateHTML(data) {
     `
 }
 
-// TODO: Create a function to initialize app
-function init() {
-    inquirer.prompt(questions)
-        .then(function (userInput) {
-            console.log(userInput)
-            writeToFile('index.html', generateHTML(userInput))
-        })
-}
 
 // Function call to initialize app
-init();
+managerQuestions()

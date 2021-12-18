@@ -16,12 +16,12 @@ function managerQuestions(){
     inquirer.prompt([
         {
             type: 'input',
-            name: 'name',
+            name: 'managerName',
             message: 'Enter your name:',
         },
         {
             type: 'input',
-            name: 'github',
+            name: 'managerID',
             message: 'Enter your employee ID:',
         },
         {
@@ -31,11 +31,11 @@ function managerQuestions(){
         },
         {
             type: 'input',
-            name: 'description',
+            name: 'officeNumber',
             message: 'Enter your office number:',
         }        
     ]).then(managerResponses => {
-        manager = new Manager(managerResponses.name,managerResponses.github,managerResponses.email,managerResponses.description)
+        manager = new Manager(managerResponses.managerName,managerResponses.managerID,managerResponses.email,managerResponses.officeNumber)
         console.log('manager info complete, please input the following information for the rest of the team')
         employeeQuestions()
     })
@@ -112,9 +112,22 @@ function employeeQuestions(){
         } if (answers.addteamagain === true){
             employeeQuestions()
         } else {
+            var home = fs.readFileSync('./templates/index.html','utf8')
 
-            fs.writeFile('./index.html')
-            
+            var managerCard = fs.readFileSync('./templates/Manager.html', 'utf8')
+            managerCard = managerCard.replace('{{name}}', manager.getName());
+            managerCard = managerCard.replace('{{managerid}}', manager.getID())
+            managerCard = managerCard.replace('{{email}}', manager.getEmail())
+            managerCard = managerCard.replace('{{description}}', manager.getOfficeNumber())
+
+            console.log(managerCard)
+
+            var cards = managerCard
+
+            home = home.replace('{{cards}}', cards)
+
+            fs.writeFileSync('./index.html', home)
+
             console.log('please view index.html for the completed team')
         }
     })

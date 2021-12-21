@@ -1,6 +1,12 @@
-<div>
-    {{name}}
-    {{ID}}
-    {{email}}
-    {{description}}
+
+<div class="col-9 col-lg-4">
+  <div class="card border-primary border-2">
+    <div class="card-body text-center py-5">
+      <h4 class="card-title">Intern</h4>
+      <p class="lead card-subtitle">{{name}}</p>
+      <p class="card-text mx-5 text-muted d-none d-lg-block">Employee ID: {{ID}}</p>
+      <p class="card-text mx-5 text-muted d-none d-lg-block">Employee School: {{school}}</p>
+      <a href="mailto:{{email}}"class="card-text mx-5 text-muted d-none d-lg-block">Send Email</a>
+    </div>
+  </div>
 </div>

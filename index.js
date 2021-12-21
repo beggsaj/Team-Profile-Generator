@@ -114,7 +114,7 @@ function employeeQuestions(){
 
             var managerCard = fs.readFileSync('./templates/Manager.html', 'utf8')
             managerCard = managerCard.replace('{{name}}', manager.getName());
-            managerCard = managerCard.replace('{{managerid}}', manager.getID())
+            managerCard = managerCard.replace('{{managerID}}', manager.getID())
             managerCard = managerCard.replace('{{email}}', manager.getEmail())
             managerCard = managerCard.replace('{{description}}', manager.getOfficeNumber())
 
@@ -139,20 +139,20 @@ function employeeQuestions(){
 
 function additionalEmployees (employee) {
     if (employee.getRole() === 'Intern') {
-        var internCard =fs.readFileSync('./templates/Intern.html', 'utf8')
-        internCard = internCard.replace('{{name}}', employee.getName());
-        internCard = internCard.replace('{{ID}}', employee.getID())
-        internCard = internCard.replace('{{email}}', employee.getEmail())
-        internCard = internCard.replace('{{description}}', employee.getSchool())
-        return internCard
+        var intern =fs.readFileSync('./templates/Intern.html', 'utf8')
+        intern = intern.replace('{{name}}', employee.getName());
+        intern = intern.replace('{{ID}}', employee.getID())
+        intern = intern.replace('{{email}}', employee.getEmail())
+        intern = intern.replace('{{internschool}}', employee.getSchool())
+        return intern
     }  
     else if (employee.getRole() === 'Engineer') {
-        var engineerCard =fs.readFileSync('./templates/Engineer.html', 'utf8')
-        engineerCard = engineerCard.replace('{{name}}', employee.getName());
-        engineerCard = engineerCard.replace('{{ID}}', employee.getID())
-        engineerCard = engineerCard.replace('{{email}}', employee.getEmail())
-        engineerCard = engineerCard.replace('{{description}}', employee.getGithub())
-        return engineerCard
+        var engineer =fs.readFileSync('./templates/Engineer.html', 'utf8')
+        engineer = engineer.replace('{{name}}', employee.getName());
+        engineer = engineer.replace('{{ID}}', employee.getID())
+        engineer = engineer.replace('{{email}}', employee.getEmail())
+        engineer = engineer.replace('{{engineerGithub}}', employee.getGithub())
+        return engineer
     }      
 }
 

@@ -92,7 +92,7 @@ function employeeQuestions(){
         },
         {
             type: 'input',
-            name: 'internschool',
+            name: 'school',
             message: 'Enter Intern School',
             when: (answers) => answers.employeeType === 'Intern'
         },
@@ -104,7 +104,7 @@ function employeeQuestions(){
     ]).then(answers => {
         console.log(answers.employeeType)
         if (answers.employeeType === 'Intern'){
-            completeTeam.push(new Intern(answers.internname, answers.internid, answers.internemail, answers.internschool))
+            completeTeam.push(new Intern(answers.internname, answers.internid, answers.internemail, answers.school))
         } else if (answers.employeeType === 'Engineer') {
             completeTeam.push(new Engineer (answers.engineerName, answers.engineerID, answers.engineerEmail, answers.engineerGithub))
         } if (answers.addteamagain === true){
@@ -114,9 +114,9 @@ function employeeQuestions(){
 
             var managerCard = fs.readFileSync('./templates/Manager.html', 'utf8')
             managerCard = managerCard.replace('{{name}}', manager.getName());
-            managerCard = managerCard.replace('{{managerID}}', manager.getID())
+            managerCard = managerCard.replace('{{ID}}', manager.getID())
             managerCard = managerCard.replace('{{email}}', manager.getEmail())
-            managerCard = managerCard.replace('{{description}}', manager.getOfficeNumber())
+            managerCard = managerCard.replace('{{officeNumber}}', manager.getOfficeNumber())
 
 
             var cards = managerCard
@@ -143,7 +143,7 @@ function additionalEmployees (employee) {
         intern = intern.replace('{{name}}', employee.getName());
         intern = intern.replace('{{ID}}', employee.getID())
         intern = intern.replace('{{email}}', employee.getEmail())
-        intern = intern.replace('{{internschool}}', employee.getSchool())
+        intern = intern.replace('{{school}}', employee.getSchool())
         return intern
     }  
     else if (employee.getRole() === 'Engineer') {

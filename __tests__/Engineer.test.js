@@ -1,4 +1,4 @@
-const Engineer = require("./lib/Engineer")
+const Engineer = require("../lib/Engineer")
 
 test("assigns github account information based on prompt responses", () => {
     const testInput = "beggsaj"

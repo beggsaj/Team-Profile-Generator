@@ -1,1 +1,19 @@
-#test
+# Team Generator
+
+Purpose
+An app that generates a team profile page
+
+Built With
+HTML
+Javascript
+Node
+
+Demo
+https://drive.google.com/file/d/1FYjkrMcaS73U_nstrNv7UogoVl5XtRFC/view
+
+Images
+![image](https://user-images.githubusercontent.com/91335294/146941571-3f90d147-4338-4808-91ff-66207fa89f65.png)
+
+
+Contribution
+Made by Abigail Beggs
